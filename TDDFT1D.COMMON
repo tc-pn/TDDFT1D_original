@@ -1,0 +1,100 @@
+c-----------------------------------------------------
+c  parameters from the .in
+c-----------------------------------------------------
+      INTEGER     Ibcs 
+      real*8      pas,delta_t		! r-step, time step
+      integer     Ntime,NPRINT		! Number of time iteration, print in output file every NPRINT 
+      real*8	  rangeimag,vimag	! imaginary pot--boundary conditions 
+      integer     rangeimag_i 		! dimension in units of r-step
+      real*8      v_0,a,r_0			! wood-saxon potential 
+      real*8      lambda			! external harmonic potential
+      real*8      lambda_ini		! external harmonic potential for initial WF
+      character*6 name_run  		! output file name 
+      REAL*8      box_dim 			! distance from center of the system to the box --particle evaporation  
+      REAL*8      c2,cbeta,beta     ! Interaction properties --Skyrme like
+      integer     Iimag  			! Iteration for imaginay time  
+      REAL*8      delta_0 			! Initial guess for BCS guap 
+      integer     N_part 			! particle number
+c-----------------------------------------------------
+c  parameters for table
+c-----------------------------------------------------
+c network size, maximal number of wave-functions
+      INTEGER     noeud,Nmax_sp
+      PARAMETER  (noeud=250,Nmax_sp=40)
+c-----------------------------------------------------
+c constants in MeV, C, fm units
+c----------------------------------------------------- 
+      real*8      MASS,HBAR
+      REAL*8      HB,H1,H2      
+      
+c Network center = noeud/2
+      integer     I_centre
+      
+c------------------
+c DENSITY part
+c------------------
+      REAL*8      densite(0:Noeud)  			!onebody density
+      REAL*8      DENS2(0:Noeud,Nmax_sp)		!two-body density
+      COMPLEX*16  wave_sp(0:Noeud,Nmax_sp)   	! wave-functions
+      COMPLEX*16  DENS(0:Noeud)
+      REAL*8      ni_sp(Nmax_sp)				! sp occupation
+c------------------
+c POTENTIAL part
+c-----------------     
+      REAL*8      pot_ini(0:Noeud)              ! initial guess for HO wave-functions
+      REAL*8      pot_one(0:Noeud) 				! mean-field pot
+      REAL*8      pot_two(0:Noeud) 				! two-body interaction	 
+      REAL*8      MF(0:Noeud)					! Mean-field
+      REAL*8      Upot(0:Noeud)
+      real*8      Hamilt(0:Noeud,0:Noeud)		!Hamiltonian in r-space
+      
+      real*8      Ener(Noeud+1)					! single-particle energy
+      REAL*8      Ener_mf(Nmax_sp)
+c------------------
+c IMAG part
+c-----------------     
+      real*8      POT_imag(0:Noeud)				!Imag potential for boundary absorption 
+      COMPLEX*16  POT_cplx(0:Noeud)				! sum of real+imag potential     
+      
+c------------------
+c Pairing part
+c------------------
+
+      REAL*8      V_inter( Nmax_sp,Nmax_sp)     ! residual interaction--direct
+      REAL*8      V_echange( Nmax_sp,Nmax_sp)	! residual interaction--exchange
+      REAL*8      Delta(Nmax_sp)				! gaps
+      REAL*8      Delta_p(Nmax_sp)				! gaps for pairing
+      REAL*8      u(Nmax_sp)					! U bogo
+      REAL*8      v(Nmax_sp)      				! V bogo
+c------------------
+c Time-evolution
+c------------------      
+      REAL*8 HamI(0:Noeud)
+      
+      common /bcsornot/Ibcs
+      common /lattice_i/pas,I_centre
+      common /lattice_r/box_dim
+      common /temps/delta_t
+      common /temps_i/Ntime,NPRINT
+      common /pot_imag/rangeimag,vimag,rangeimag_i
+      common /wood_saxon/v_0,a,r_0
+      common /harmonique/lambda_ini,lambda
+      common /name_run/name_run
+      common /const/MASS,HBAR,HB,H1,H2
+!      common /interact/V0_2,rg_2
+      common /interact/c2,cbeta,beta
+      common /HF/Iimag,N_part
+      common /BCS/delta_0
+      
+      
+      COMMON /pot/pot_ini,pot_one,pot_two,MF,Upot,POT_imag
+      COMMON /potim/POT_cplx
+      COMMON /Ham/Hamilt,DENS
+      COMMON /Den/densite,DENS2
+      COMMON /ENER/Ener,Ener_mf
+      COMMON /WF/wave_sp,ni_sp
+      COMMON /Vres/V_inter,V_echange
+      COMMON /PAIR/u,v,Delta,Delta_p
+      
+      COMMON/Prop/HamI
+      

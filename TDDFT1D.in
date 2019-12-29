@@ -1,0 +1,13 @@
+0               # Ibc: O TDHF , 1: BCS (Not yet working)
+0.3 0.03		# pas,delta_t
+10000   1000	    # Ntime,NPRINT
+000000			# name_run
+0.05            # external HO potential for initial WF guess 
+0.05 		    # external HO potential for evolution 
+0. 0.5 1.5 		# external WS potential  v_0,a,r_0  (V_0 >0)  
+10 -10.         # rangeimag,vimag(<0)    
+40 			    # box_dim s
+20	            # N_part ! only even values
+-70.897122 55.787572  2.1666      	# V0_2,rg_2 (V0_2<0) -20 
+100			    # Iimag
+0.4			    # DELTA_0

@@ -1,0 +1,1 @@
+gfortran -o tddftex main_TDDFT1D.for routines_gan.for init_DFT1DMF.for TDDFT1D.for 
