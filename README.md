@@ -6,7 +6,7 @@ The rest of the ils are the DFT code itself.
 
 COMMON initializes all needed variables.
 
-init_DFT1DMF.for computes the initial single-particle states in a iterative way, in a Wood-Saxon potential completed by a harmonic oscillator and an optical potential at the borders of the spatial lattice.
+init_DFT1DMF.for computes the initial single-particle states in a iterative way, in a Wood-Saxon potential completed by a harmonic oscillator and an optical potential at the borders of the spatial lattice. The harmonic oscillator is there to prevent an initial state with particles in the continuum. There is a possibility to initialize the code using only an Harmonic Oscillator.
 
 TDDFT1D.for contains the code for the time-propagation.
 
